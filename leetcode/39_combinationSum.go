@@ -30,21 +30,23 @@ func CombinationSum(candidates []int, target int) [][]int {
 	if len(candidates) == 0 {
 		return result
 	}
-	combinSum(&candidates, []int{}, 0, target, &result)
+	combinSum(candidates, []int{}, 0, target, &result)
 	return result
 }
 
-func combinSum(candidates *[]int, list []int, idx, remain int, result *[][]int) {
+func combinSum(candidates []int, list []int, idx, remain int, result *[][]int) {
 	if remain < 0 {
 		return
 	}
 	if remain == 0 {
-		*result = append(*result, list)
+		var tmp []int
+		tmp = append(tmp, list...)
+		*result = append(*result, tmp)
 		return
 	}
 
-	for i := idx; i < len(*candidates); i++ {
-		var tmp = append(list, (*candidates)[i])
-		combinSum(candidates, tmp, i, remain-(*candidates)[i], result)
+	for i := idx; i < len(candidates); i++ {
+		var tmp = append(list, (candidates)[i])
+		combinSum(candidates, tmp, i, remain-(candidates)[i], result)
 	}
 }
